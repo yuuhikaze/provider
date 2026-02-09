@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 
+class Notifier extends ChangeNotifier {
+
+}
+
 class MyuserProvider extends ChangeNotifier {
 //Atributos
   String username;
