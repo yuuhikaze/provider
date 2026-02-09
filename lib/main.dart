@@ -30,16 +30,20 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              "Contador: ${context.watch<MyuserProvider>().counter}",
+              "CONTADOR: ${context.watch<MyuserProvider>().counter}",
               style: TextStyle(fontFamily: "Arial", color: Colors.red),
             ),
-            ElevatedButton(
+            IconButton(
               onPressed: () {
-                context.watch<MyuserProvider>().updateCounter(updateAmount: 1);
-                // ignore: avoid_print
-                print("Counter: ${context.watch<MyuserProvider>().counter}");
+                context.read<MyuserProvider>().toggleFavorite();
               },
-              child: Text("Boton"),
+              icon: Icon(
+                context.watch<MyuserProvider>().isFavorite
+                    ? Icons.star
+                    : Icons.star_border,
+                color: Colors.amber,
+                size: 48,
+              ),
             ),
           ],
         ),
@@ -56,20 +60,21 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               );
             },
-            child: const Icon(Icons.home),
+            child: const Icon(Icons.next_plan),
           ),
+          const SizedBox(height: 13.0),
           FloatingActionButton(
             onPressed: () {
-              context.watch<MyuserProvider>().updateCounter(updateAmount: 1);
-              print("Counter: ${context.watch<MyuserProvider>().counter}");
+              context.read<MyuserProvider>().updateCounter(updateAmount: 1);
+              print("Counter: ${context.read<MyuserProvider>().counter}");
             },
             child: const Icon(Icons.add),
           ),
           const SizedBox(height: 13.0),
           FloatingActionButton(
             onPressed: () {
-              context.watch<MyuserProvider>().updateCounter(updateAmount: -1);
-              print("Counter: ${context.watch<MyuserProvider>().counter}");
+              context.read<MyuserProvider>().updateCounter(updateAmount: -1);
+              print("Counter: ${context.read<MyuserProvider>().counter}");
             },
             child: const Icon(Icons.remove),
           ),
@@ -100,7 +105,7 @@ class _SecondRouteState extends State<SecondRoute> {
           actions: [
             FloatingActionButton(
               onPressed: () {
-                context.watch<MyuserProvider>().resetCounter();
+                context.read<MyuserProvider>().resetCounter();
               },
               child: const Icon(Icons.refresh),
             ),
@@ -111,15 +116,15 @@ class _SecondRouteState extends State<SecondRoute> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                "Contador: ${context.watch<MyuserProvider>().counter}",
+                "CONTADOR PAG2: ${context.watch<MyuserProvider>().counter}",
                 style: TextStyle(color: Colors.red),
               ),
-              ElevatedButton(
-                onPressed: () {
-                  context.watch<MyuserProvider>().updateCounter(updateAmount: -1);
-                  // ignore: avoid_print
+              SwitchListTile(
+                title: Text("Meowzers"),
+                value: context.watch<MyuserProvider>().isFavorite,
+                onChanged: (bool value) {
+                  context.read<MyuserProvider>().toggleFavorite();
                 },
-                child: Text("Boton"),
               ),
             ],
           ),
@@ -129,14 +134,14 @@ class _SecondRouteState extends State<SecondRoute> {
           children: [
             FloatingActionButton(
               onPressed: () {
-                context.watch<MyuserProvider>().updateCounter(updateAmount: 1);
+                context.read<MyuserProvider>().updateCounter(updateAmount: 1);
               },
               child: const Icon(Icons.add),
             ),
             const SizedBox(height: 13.0),
             FloatingActionButton(
               onPressed: () {
-                context.watch<MyuserProvider>().updateCounter(updateAmount: -1);
+                context.read<MyuserProvider>().updateCounter(updateAmount: -1);
               },
               child: const Icon(Icons.remove),
             ),
