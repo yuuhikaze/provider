@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_3_riverpod/paginas/home_page.dart';
 import 'package:flutter_3_riverpod/paginas/setting_page.dart';
 
-
 class MyInicio extends ConsumerStatefulWidget {
   const MyInicio({super.key});
 
@@ -13,11 +12,8 @@ class MyInicio extends ConsumerStatefulWidget {
 
 class _MyInicioState extends ConsumerState<MyInicio> {
   int idx = 0;
-  
-  final List<Widget> pages = const [
-    HomePage(),
-    Configuraciones(),
-  ];
+
+  final List<Widget> pages = const [HomePage(), Configuraciones()];
 
   @override
   Widget build(BuildContext context) {
@@ -27,8 +23,14 @@ class _MyInicioState extends ConsumerState<MyInicio> {
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: idx,
         items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(icon: Icon(Icons.settings), label: 'Settings'),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.shopping_bag),
+            label: 'Productos',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.settings),
+            label: 'Settings',
+          ),
         ],
         onTap: (value) => setState(() => idx = value),
       ),
